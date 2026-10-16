@@ -29,4 +29,9 @@ export const zForexQueryParams = z.object({
             "macd_histogram, rsi_14, sma_20, sma_50, sma_200, " +
             "stochastic_14_3, williams_r_14, or `all`.",
     ).optional(),
+    dataset_version: z.string().describe(
+        "Content version from the first page's response. Sending it on " +
+            "later pages pins the read; if the history changed the API " +
+            "returns 409 and the download should restart.",
+    ).nullable().optional(),
 }).strict();

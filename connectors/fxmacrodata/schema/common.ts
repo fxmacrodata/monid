@@ -33,8 +33,7 @@ export const CURRENCIES = [
 ] as const;
 
 export const zCurrency = z.enum(CURRENCIES).describe(
-    "Three-letter currency code, upper case. USD works without an API " +
-        "key; the other currencies need one.",
+    "Three-letter currency code, upper case.",
 );
 
 export const zCurrencyPathParams = z.object({ currency: zCurrency });

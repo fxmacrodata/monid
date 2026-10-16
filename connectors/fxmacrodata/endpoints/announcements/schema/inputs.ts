@@ -65,4 +65,18 @@ export const zAnnouncementsQueryParams = z.object({
     official_only: z.boolean().describe(
         "Return only official-source rows (default true).",
     ).optional(),
+    as_of: z.string().describe(
+        "Point-in-time cutoff, ISO 8601 with a UTC offset: only rows " +
+            "available by then are returned, as they stood then.",
+    ).nullable().optional(),
+    availability: z.enum(["public", "captured"]).describe(
+        "Clock `as_of` is compared with: `public` (default) is when the " +
+            "publisher released the figure, `captured` when FXMacroData " +
+            "recorded it.",
+    ).optional(),
+    dataset_version: z.string().describe(
+        "Content version from the first page's response. Sending it on " +
+            "later pages pins the read; if the history changed the API " +
+            "returns 409 and the download should restart.",
+    ).nullable().optional(),
 }).strict();

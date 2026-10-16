@@ -42,6 +42,9 @@ Deno.test(`${ID}: pair from the 22 codes; limit 1-100; unknown keys rejected`, a
         { pathParams: path, queryParams: { limit: 0 } },
         { pathParams: path, queryParams: { limit: 101 } },
         { pathParams: path, queryParams: { page: 0 } },
+        // point-in-time replay is an announcements control, not FX
+        { pathParams: path, queryParams: { as_of: "2026-01-01T00:00:00Z" } },
+        { pathParams: path, queryParams: { availability: "public" } },
         { pathParams: path, queryParams: { bogus: 1 } },
     ];
     for (const input of rejected) {

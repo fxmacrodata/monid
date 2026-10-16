@@ -69,6 +69,7 @@ Deno.test(`${ID}: path params required; bounds and vocabularies enforced`, async
         { pathParams: path, queryParams: { fields: "minimal" } },
         { pathParams: path, queryParams: { frequency: "annual" } },
         { pathParams: path, queryParams: { revisions: "second" } },
+        { pathParams: path, queryParams: { availability: "known" } },
         { pathParams: path, queryParams: { bogus: 1 } },
     ];
     for (const input of rejected) {

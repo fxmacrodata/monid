@@ -3,7 +3,7 @@ import {
     zAnnouncementsQueryParams,
 } from "../endpoints/announcements/schema/inputs.ts";
 import { zForexQueryParams } from "../endpoints/forex/schema/inputs.ts";
-import { CURRENCIES, zCurrency } from "./common.ts";
+import { zCurrency } from "./common.ts";
 
 Deno.test("announcements accepts point-in-time and version controls", () => {
     for (const availability of ["public", "captured"] as const) {
@@ -46,7 +46,32 @@ Deno.test("forex rejects announcements-only replay controls", () => {
 });
 
 Deno.test("shared currency metadata describes codes without an auth claim", () => {
-    for (const currency of CURRENCIES) {
+    const expectedCurrencies = [
+        "AUD",
+        "BRL",
+        "CAD",
+        "CHF",
+        "CNH",
+        "CNY",
+        "DKK",
+        "EUR",
+        "GBP",
+        "HUF",
+        "ILS",
+        "JPY",
+        "KRW",
+        "MYR",
+        "NGN",
+        "NOK",
+        "NZD",
+        "PEN",
+        "SEK",
+        "THB",
+        "TWD",
+        "USD",
+    ];
+    deepStrictEqual([...zCurrency.options].sort(), expectedCurrencies);
+    for (const currency of expectedCurrencies) {
         strictEqual(zCurrency.parse(currency), currency);
     }
     strictEqual(zCurrency.safeParse("XAU").success, false);
